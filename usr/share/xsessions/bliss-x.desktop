@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=Bliss XSession
+Comment=Use this session to run Bliss as your desktop environment
+Exec=/usr/bin/bliss-session.sh
+Icon=
+Type=Application
+DesktopNames=Bliss
