@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_PATH=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-
+SOURCE_NAME="blissos"
 # First, we check for a .iso file in /updates/blissos 
 # If found we use that as the path to the .iso file
 if [ -f "$/updates/blissos/*.iso" ]; then
