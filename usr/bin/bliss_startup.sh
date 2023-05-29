@@ -10,6 +10,19 @@ else
 	DISPLAY_TYPE="gtk"
 fi
 
+# check to see if /blissos/data.img exists already, if not create it
+if [ ! -f "/blissos/data.img" ]; then
+
+# Ask user what size they would like their data.img to be (4G,6G,8G,10G,12G,14G,16G, or other)
+echo "What size would you like your data.img to be? (4G, 8G, 12G, 16G, or other)"
+read size  # Read the user input
+
+# Create the data.img using the $size specified in GB
+sudo truncate -s $size /blissos/data.img
+sudo mkfs.ext4 -F -b 4096 -L "/data" /blissos/data.img
+sudo chmod 777 /blissos/data.img
+fi
+
 #location=/nvme/PS/android-2021-04-04
 LOCATION=/blissos
 DIMENSIONS=$(xdpyinfo | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/')
