@@ -21,35 +21,42 @@ else
 fi
 
 # Check to see if we have a /blissos/ folder already
-if [ -d "/blissos" ]; then
+if [ ! -d "/blissos" ]; then
     echo "Folder already exists"
-    mkdir -p /blissos
+    sudo mkdir -p /blissos
+else
+	echo "/blissos folder found"
 fi
 
 # Mount the .iso file
 echo "Mounting .iso file..."
-sudo mkdir /mnt/iso
+sudo mkdir -p /mnt/iso
 sudo mount -o loop $ISO_PATH /mnt/iso
 
 # Check the mounted .iso file for a system.efs file
 if [ -f "/mnt/iso/system.efs" ]; then
+	echo "EFS system found"
     #Mount the system.efs file
-    sudo mkdir /mnt/efs
+    sudo mkdir -p /mnt/efs
     sudo mount -o loop /mnt/iso/system.efs /mnt/efs
     # copy the syste,.img from inside the mounted system.efs file to /blissos
-    sudo cp /mnt/efs/system.img /blissos/system.img
+    sudo cp /mnt/efs/system.img /blissos/
     # unmount the system.efs file
     sudo umount /mnt/efs
 elif [ -f "/mnt/iso/system.sfs" ]; then
+	echo "SFS system found"
     #Mount the system.sfs file
-    sudo mkdir /mnt/sfs
+    sudo mkdir -p /mnt/sfs
     sudo mount -o loop /mnt/iso/system.sfs /mnt/sfs
     # copy the syste,.img from inside the mounted system.sfs file to /blissos
-    sudo cp /mnt/sfs/system.img /blissos/system.img
+    sudo cp /mnt/sfs/system.img /blissos/
     # unmount the system.sfs file
     sudo umount /mnt/sfs
 fi
-
+if [ ! -f "/blissos/system.img" ]; then
+	echo "Somethings wrong, exiting"
+	exit 1
+fi
 # Copy the initrd.img and kernel files to /blissos
 sudo cp /mnt/iso/initrd.img /blissos/initrd.img
 sudo cp /mnt/iso/kernel /blissos/kernel
