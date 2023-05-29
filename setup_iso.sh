@@ -72,8 +72,11 @@ echo "What size would you like your data.img to be? (4G, 8G, 12G, 16G, or other)
 read size  # Read the user input
 
 # Create the data.img using the $size specified in GB
-sudo dd if=/dev/zero of=/blissos/data.img bs=1M count=0 seek=$size
-sudo mkfs.ext4 -F /blissos/data.img
+# sudo dd if=/dev/zero of=/blissos/data.img bs=1M count=0 seek=$size
+# sudo mkfs.ext4 -F /blissos/data.img
+
+sudo truncate -s $size /blissos/data.img
+sudo mkfs.ext4 -F -b 4096 -L "/data" /blissos/data.img
 sudo chmod 777 /blissos/data.img
 fi
 

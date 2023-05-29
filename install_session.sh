@@ -14,6 +14,7 @@ CONFIG="false"
 # sudo apt install weston qemu qemu-system mutter sakura libvirt-clients
 echo "now installing..."
 sudo chmod +X $SCRIPT_PATH/usr/bin
+sudo chmod 777 $SCRIPT_PATH/usr/*
 sudo cp -rp $SCRIPT_PATH/usr/* /usr/
 cp -r $SCRIPT_PATH/home/ $HPATH/
 
