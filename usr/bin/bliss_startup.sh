@@ -115,6 +115,6 @@ vfio=(
 #su -c 'echo 8086 56a5 > /sys/bus/pci/drivers/vfio-pci/new_id"'
 
 qemu-system-x86_64 ${args[@]} \
-      -append "root=/dev/ram0 console=ttyS0 DATA=/dev/vdb PC_MODE=1 SETUPWIZARD=0" -kernel ${LOCATION}/kernel
+      -append "root=/dev/ram0 console=ttyS0 DATA=/dev/vdb PC_MODE=1 DPI=160 SETUPWIZARD=0" -kernel ${LOCATION}/kernel
 
 pkill qemu
