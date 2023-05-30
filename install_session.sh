@@ -4,6 +4,8 @@
 # 
 # This will install Weston session manager, qemu, and setup the 
 # Bliss session option
+#
+# Do not run as sudo as some configs need to be created in user home folder
 # 
 
 SCRIPT_PATH=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
